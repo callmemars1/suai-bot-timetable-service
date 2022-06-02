@@ -1,1 +1,0 @@
-# suai-bot-timetable-service
