@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package SuaiTimetable;
+
+option csharp_namespace = "Suai.Bot.Timetable.Proto";
+
+service TimetableProvider
+{
+	rpc GetTimetable(TimetableRequest) returns (TimetableReply);
+}
+
+message TimetableRequest
+{
+	string group = 1;
+	string teacher = 2;
+	string building = 3;
+	string classRoom = 4;
+}
+
+message TimetableReply
+{
+	repeated Lesson lessons = 1;
+	string actualWeekType = 2;
+}
+
+message Lesson
+{
+	repeated string groups = 1;
+	repeated string teachers = 2;
+	string building = 3;
+	repeated string classRooms = 4;
+	string weekDay = 5;
+	repeated string weekTypes = 6;
+	string type = 7;
+	string name = 8;
+	string startTime = 9;
+	string endTime = 10;
+	string orderNumber = 11;
+}

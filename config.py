@@ -1,0 +1,6 @@
+DB_HOST = '178.252.96.108:27015'
+DB_USER = 'timetable_service'
+DB_PASS = 'fSDHFdjsdgjkljlkdjgd324891OIaffg'
+DB_NAME = 'timetable'
+collection_name = 'lessons'
+insecure_port = '[::]:50051'
