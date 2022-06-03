@@ -4,10 +4,10 @@ import TimeTableService_pb2
 import TimeTableService_pb2_grpc
 
 from concurrent import futures
-from config import insecure_port
-from config import DB_USER, DB_NAME, DB_HOST, DB_PASS, collection_name, actual_week_collection_name
+from config import collection_name, actual_week_collection_name
 from rasp_mongo_client import RaspMongoClient
 from loguru import logger
+import os
 
 
 class TimetableService(TimeTableService_pb2_grpc.TimetableProviderServicer):
@@ -46,7 +46,7 @@ class TimetableService(TimeTableService_pb2_grpc.TimetableProviderServicer):
 def serve(database):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     TimeTableService_pb2_grpc.add_TimetableProviderServicer_to_server(TimetableService(database), server)
-    server.add_insecure_port(insecure_port)
+    server.add_insecure_port(os.environ["GRPC_HOST"])
     server.start()
     server.wait_for_termination()
 
@@ -55,8 +55,8 @@ if __name__ == '__main__':
     logger.add('debug.log', format="{time} {level} {message}", level='DEBUG', rotation='10 KB')
     logger.info('suai_bot_timetable_service started work')
 
-    bd = RaspMongoClient(f'mongodb://{DB_USER}:{DB_PASS}@{DB_HOST}/',
-                         f'{DB_NAME}',
+    bd = RaspMongoClient(f'mongodb://{os.environ["DB_USER"]}:{os.environ["DB_PASS"]}@{os.environ["DB_HOST"]}/',
+                         f'{os.environ["DB_NAME"]}',
                          f'{collection_name}')
 
     logger.info('run server')
