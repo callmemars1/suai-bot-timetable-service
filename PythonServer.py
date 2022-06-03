@@ -53,6 +53,7 @@ def serve(database):
 
 if __name__ == '__main__':
     logger.add('debug.log', format="{time} {level} {message}", level='DEBUG', rotation='10 KB')
+    logger.info(os.environ["DB_NAME"] + ' ' + os.environ["DB_USER"])
     logger.info('suai_bot_timetable_service started work')
 
     bd = RaspMongoClient(f'mongodb://{os.environ["DB_USER"]}:{os.environ["DB_PASS"]}@{os.environ["DB_HOST"]}/',
