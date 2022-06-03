@@ -8,7 +8,7 @@ import logging
 def run():
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = TimeTableService_pb2_grpc.TimetableProviderStub(channel)
-        response = stub.GetTimetable(TimeTableService_pb2.TimetableRequest(group='5038'))
+        response = stub.GetTimetable(TimeTableService_pb2.TimetableRequest(group='5031'))
         print(f'{response.actualWeekType=}')
         for lesson in response.lessons:
             print(f'{lesson.groups=}\n',
