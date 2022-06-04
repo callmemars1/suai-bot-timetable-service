@@ -29,7 +29,7 @@ class TimetableService(TimeTableService_pb2_grpc.TimetableProviderServicer):
             lesson.classRooms.extend(result['class_rooms'])
             lesson.weekDay = result['week_day']
             lesson.type = result['lesson_type']
-            lesson.weekTypes.extend(result['week_type'])
+            lesson.weekTypes.extend(result['week_types'])
             lesson.name = result['lesson_name']
             lesson.building = result['building']
             lesson.startTime = result['start_time']
